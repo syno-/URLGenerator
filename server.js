@@ -25,13 +25,17 @@ http.createServer(function (req, res) {
         text: '@' + params.user_name + ' has opened a video chat room: <https://syno.in/' +
               params.text + '|' + params.text + '>'
     });
-    request.post(options, function(error, response, body){
-      if ( response.statusCode != 200) {
-        console.log('error: '+ response.statusCode + body);
-      }
-    });
-//    res.writeHead(200, {'Content-Type': 'application/json'});
-//    res.write('{ "text": "http://syno.in/vchat.html?' + qs.parse(data).text + '", "username": "vv" }');
+    if (params.text) {
+      request.post(options, function(error, response, body){
+        if ( response.statusCode != 200) {
+          console.log('error: '+ response.statusCode + body);
+        }
+      });
+    } else {
+      res.writeHead(200, {'Content-Type': 'application/json'});
+//      res.write('{ "text": "syno コマンドの引数にルーム名を指定してください", "username": "SYNO-bot" }');
+      res.write('syno コマンドの引数にルーム名を指定してください');
+    }
     res.end();
   }).on('error', function (error){
     console.log(error.message);
