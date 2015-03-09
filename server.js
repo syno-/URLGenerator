@@ -1,5 +1,5 @@
 #!/usr/local/bin/node
-var config = require('./config/default.json');
+var config = require(__dirname + '/config/default.json');
 var http = require('http');
 var qs = require('qs');
 var request = require('request');
@@ -22,7 +22,7 @@ http.createServer(function (req, res) {
 //                 (params.channel_name === "privategroup") : "" : "#" + params.channel_name,
         channel: params.channel_id,
 //        channel_id: params.channel_id,
-        text: '@' + params.user_name + ' open a room: <http://syno.in/vchat.html?' +
+        text: '@' + params.user_name + ' has opened a video chat room: <https://syno.in/' +
               params.text + '|' + params.text + '>'
     });
     request.post(options, function(error, response, body){
